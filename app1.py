@@ -73,13 +73,10 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-    def text_to_speech (text,tld):
-        return audio_file, text
+      audio = gTTs(text=traduccion, lang=idioma_destino.lower())
+      st.audio(audio, format="audio/mp3")
 
-        audio_file = open(f"temp/{result}.mp3","rb")
-        audio_bytes = audio_file.read()
-        st.audio(audio_bytes, format= "audio/mp3", start_time=0)
-      
+
 
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
