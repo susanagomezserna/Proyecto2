@@ -211,12 +211,11 @@ if result:
 
 
 #aqui empieza la otra interfaz
-
-
-
+import streamlit as st
+from googletrans import Translator
 
 # Título de la aplicación
-st.title("Traductor de Texto con Audio")
+st.title("Traductor de Texto")
 
 # Entrada de texto
 texto_a_traducir = st.text_area("Escribe el texto que deseas traducir:")
@@ -241,14 +240,10 @@ if texto_a_traducir:
         
         st.write("Texto traducido:")
         st.write(traduccion)
-
-        # Reproducir audio de la traducción
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
-            audio = gTTS(text=traduccion, lang=idioma_destino.lower())
-            audio.save(temp_audio_file.name)
-            st.audio(temp_audio_file.name, format="audio/mp3")
-
-        os.remove(temp_audio_file.name)
     except Exception as e:
-        st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
+        st.write("Ocurrió un error al traducir el texto.")
+
+# Nota
+st.sidebar.write("Nota: Este es un ejemplo simple de traducción. La precisión de la traducción puede variar.")
+
 
