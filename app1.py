@@ -20,6 +20,8 @@ import streamlit as st
 from gtts import gTTS
 from googletrans import Translator
 
+from pydub import AudioSegment
+import tempfile
 
 st.title("Reconocimiento óptico de Caracteres")
 
