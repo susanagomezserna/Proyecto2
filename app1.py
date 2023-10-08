@@ -22,6 +22,9 @@ import subprocess
 
 st.title("Reconocimiento óptico de Caracteres")
 
+image1 = Image.open('ocr.jpg')
+
+st.image(image1)
 
 img_file_buffer = st.camera_input("Toma una Foto")
 
@@ -49,6 +52,10 @@ if img_file_buffer is not None:
 
 # Título de la aplicación
 st.title("Traductor de Texto")
+
+image2 = Image.open('idiomas.jpeg')
+
+st.image(image2)
 
 # Entrada de texto
 texto_a_traducir = st.text_area("Escribe el texto que deseas traducir:")
