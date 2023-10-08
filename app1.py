@@ -47,12 +47,18 @@ if img_file_buffer is not None:
     text=pytesseract.image_to_string(img_rgb)
     st.write(text) 
 
+    if text:
+        try:
+            audio = gTTS(text=text, lang='es')  # Cambia 'es' al idioma que desees
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+                audio.save(temp_audio_file.name)
+                audio_path = temp_audio_file.name
 
-    audio = gTTS(text = text, lang='es')
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
-            audio.save(temp_audio_file.name)
-            st.audio(temp_audio_file.name, format="audio/mp3")
+            st.audio(audio_path, format="audio/mp3")
 
+        except Exception as e:
+            st.error("Ocurrió un error al generar o reproducir el audio.")
+              
 #aqui empieza la otra interfaz
 
 # Título de la aplicación
