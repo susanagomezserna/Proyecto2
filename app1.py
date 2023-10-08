@@ -22,6 +22,7 @@ import subprocess
 
 st.title("Reconocimiento óptico de Caracteres")
 
+
 img_file_buffer = st.camera_input("Toma una Foto")
 
 with st.sidebar:
