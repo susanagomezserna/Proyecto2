@@ -5,17 +5,14 @@ import pytesseract
 from PIL import Image
 
 import os
-import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
-from PIL import Image
 import time
 import glob
 
 from textblob import TextBlob
 import pandas as pd
-import streamlit as st
 
 from gtts import gTTS
 from googletrans import Translator
@@ -76,9 +73,12 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-        tts = gTTs(text=traduccion, lang=idioma_destino.lower())
-        audio = tts.read()
-        st.audio(audio, format = "audio/mp3")
+def text_to_speech (text,tld):
+      return audio_file, text
+
+audio_file = open(f"temp/{result}.mp3","rb")
+audio_bytes = audio_file.read()
+st.audio(audio_bytes, format= "audio/mp3", start_time=0)
       
 
     except Exception as e:
