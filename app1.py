@@ -78,10 +78,10 @@ if texto_a_traducir:
 
         audio = gTTs(text = traduccion, lang = idioma_destino.lower())
         audio_file_path ="traduccion.wav"
-        audio.save(audio_file_path)
-        st.audio(audio_file_path, format="audio/wav")
+        audio.save(traduccion)
+        st.audio(traduccion, format="audio/wav")
 
-        os.remove(audio_file_path)
+        os.remove(traduccion)
 
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
