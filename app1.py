@@ -22,7 +22,6 @@ from googletrans import Translator
 
 import tempfile
 import subprocess
-from pydub import AudioSegment
 
 st.title("Reconocimiento óptico de Caracteres")
 
@@ -77,17 +76,15 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-         # Reproducir audio de la traducción
+        # Crear audio de la traducción
         audio = gTTS(text=traduccion, lang=idioma_destino.lower())
+
+        # Crear un enlace de descarga para el archivo de audio
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
             audio.save(temp_audio_file.name)
-     # Reproducir el audio usando el reproductor predeterminado afplay en macOS
-            sound = AudioSegment.from_mp3(temp_audio_file.name)
-            sound.export(temp_audio_file.name, format="wav")
-            os.system(f"afplay {temp_audio_file.name}")
-
-        st.success("Audio generado y reproducido con éxito.")
-
+            st.write("Descarga el audio generado:")
+            st.markdown(f'<a href="{temp_audio_file.name}" download="traduccion.mp3">Descargar</a>', unsafe_allow_html=True)
+              
 
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
