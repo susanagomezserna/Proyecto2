@@ -22,3 +22,4 @@ Streamlit-bokeh-events
 
 textblob==0.17.1
 
+tempfile
