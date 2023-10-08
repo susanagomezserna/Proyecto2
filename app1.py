@@ -73,8 +73,8 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-      audio = gTTs(text=traduccion, lang=idioma_destino.lower())
-      st.audio(audio, format="audio/mp3")
+        audio = gTTs(text=traduccion, lang=idioma_destino.lower())
+        st.audio(audio, format="audio/mp3")
 
 
 
