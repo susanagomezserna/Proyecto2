@@ -50,7 +50,7 @@ idioma_destino1 = st.selectbox("Selecciona el idioma de destino:", ["Español", 
 
 # Traducción del texto
 translator = Translator()
-if texto_a_traducir:
+if text:
     try:
         if idioma_destino1 == "Español":
             traduccion1 = translator.translate(texto_a_traducir, dest="es").text
@@ -61,7 +61,7 @@ if texto_a_traducir:
         elif idioma_destino1 == "Alemán":
             traduccion1 = translator.translate(texto_a_traducir, dest="de").text
         else:
-            traduccion = "Seleccione un idioma de destino válido"
+            traduccion1 = "Seleccione un idioma de destino válido"
         
         st.write("Texto traducido:")
         st.write(traduccion1)
