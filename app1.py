@@ -78,6 +78,6 @@ if texto_a_traducir:
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto.")
 
-tts = gTTs (texto_a_traducir, lang = traducción)
+tts = gTTs (traduccion, lang = "de")
 tts.save("audio.mp3")
 os.system("mpg123 audio.mp3")
