@@ -76,10 +76,11 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-        audio = gTTs(text = traduccion, lang = idioma_destino.lower())      
-        with tempfile.NamedTemporaryFile(delete=False, suffix =".mp3") as temp_audio_file:
-              audio.save(temo_audio_file.name)
-              subprocess.Popen(["afplay",temp_audio_file.name])
+         # Reproducir audio de la traducción
+        audio = gTTS(text=traduccion, lang=idioma_destino.lower())
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+            audio.save(temp_audio_file.name)
+            st.audio(temp_audio_file.name, format="audio/mp3")
 
 
     except Exception as e:
