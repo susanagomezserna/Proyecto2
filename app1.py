@@ -76,12 +76,11 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-        audio = gTTs(text = traduccion, lang = idioma_destino.lower())
-        audio_file_path ="traduccion.wav"
-        audio.save(traduccion)
-        st.audio(traduccion, format="audio/wav")
+        audio = gTTs(text = traduccion, lang = idioma_destino.lower())      
+        with tempfile.NamedTemporaryFile(delete=False, suffix =".mp3") as temp_audio_file:
+              audio.save(temo_audio_file.name)
+              subprocess.Popen(["afplay",temp_audio_file.name])
 
-        os.remove(traduccion)
 
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
