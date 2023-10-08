@@ -22,6 +22,7 @@ from googletrans import Translator
 
 import tempfile
 import subprocess
+from pydub import AudioSegment
 
 st.title("Reconocimiento óptico de Caracteres")
 
@@ -80,7 +81,12 @@ if texto_a_traducir:
         audio = gTTS(text=traduccion, lang=idioma_destino.lower())
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
             audio.save(temp_audio_file.name)
-            st.audio(temp_audio_file.name, format="audio/mp3")
+     # Reproducir el audio usando el reproductor predeterminado afplay en macOS
+            sound = AudioSegment.from_mp3(temp_audio_file.name)
+            sound.export(temp_audio_file.name, format="wav")
+            os.system(f"afplay {temp_audio_file.name}")
+
+        st.success("Audio generado y reproducido con éxito.")
 
 
     except Exception as e:
