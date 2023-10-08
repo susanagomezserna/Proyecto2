@@ -20,6 +20,8 @@ import streamlit as st
 from gtts import gTTS
 from googletrans import Translator
 
+import tempfile
+import subprocess
 
 st.title("Reconocimiento óptico de Caracteres")
 
@@ -47,13 +49,13 @@ if img_file_buffer is not None:
 #aqui empieza la otra interfaz
 
 # Título de la aplicación
-st.title("Traductor de Texto")
+st.title("Traductor de Texto con Audio")
 
 # Entrada de texto
 texto_a_traducir = st.text_area("Escribe el texto que deseas traducir:")
 
 # Selección del idioma de destino
-idioma_destino = st.selectbox("Selecciona el idioma al que quieres traducir:", ["Español", "Inglés", "Francés", "Alemán"])
+idioma_destino = st.selectbox("Selecciona el idioma de destino:", ["Español", "Inglés", "Francés", "Alemán"])
 
 # Traducción del texto
 translator = Translator()
@@ -72,52 +74,17 @@ if texto_a_traducir:
         
         st.write("Texto traducido:")
         st.write(traduccion)
+
+        # Generar y reproducir audio de la traducción
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+            audio = gTTS(text=traduccion, lang=idioma_destino.lower())
+            audio.save(temp_audio_file.name)
+            subprocess.Popen(["mpg123", temp_audio_file.name])
+
+        os.remove(temp_audio_file.name)
     except Exception as e:
-        st.write("Ocurrió un error al traducir el texto.")
+        st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
 
-def text_to_speech(texto_a_traducir,tld):
-      return my_file_name, texto_a_traducir
-
-inicio ="es"
-
-if texto_a_traducir and idioma_destino:
-    traduccion = languages[idioma_destino]
-
-    texto_final = translator.translate(texto_a_traducir, src=inicio, dest=traduccion).text
-
-
-    if idioma_destino == "Español":
-
-        traduccion = "es"
-
-    elif idioma_destino == "Inglés":
-
-        traduccion = "en"
-          
-    elif idioma_destino == "Frances":
-
-        traduccion = "fr"
-          
-    elif idioma_destino == "Alemán":
-
-        traduccion = "de"
-
-
-    result, output_text = text_to_speech(texto_final, traduccion)
-
-
-    audio_file = open(f"temp/{result}.mp3", "rb")
-
-    audio_bytes = audio_file.read()
-
-    st.markdown(f"## Tu audio:")
-
-    st.audio(audio_bytes, format="audio/mp3", start_time=0)
-
-
-    st.markdown(f"## Texto en audio:")
-
-    st.write(f" {output_text}")
-
-
+# Nota
+st.sidebar.write("Nota: Este es un ejemplo simple de traducción y reproducción de audio. La precisión de la traducción y la calidad del audio pueden variar.")
 
