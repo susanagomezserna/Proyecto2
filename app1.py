@@ -209,10 +209,6 @@ if result:
 
 #aqui empieza la otra interfaz
 
-from pydub import AudioSegment
-import tempfile
-
-
 # Título de la aplicación
 st.title("Traductor de Texto con Audio")
 
