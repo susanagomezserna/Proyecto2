@@ -75,26 +75,35 @@ if texto_a_traducir:
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto.")
 
-def text_to_speech(text, tld):
-    return my_file_name, text
+def text_to_speech(texto_a_traducir,tld):
+      return my_file_name, texto_a_traducir
 
-if text and target_lang:
+inicio ="es"
 
-    target_lang_code = languages[target_lang]
+if texto_a_traducir and idioma_destino:
+    traduccion = languages[idioma_destino]
 
-    translated_text = translator.translate(text, src=source_lang, dest=target_lang_code).text
-
-
-    if target_lang == "Chino Mandarín":
-
-        target_lang_code = "zh-cn"
-
-    elif target_lang == "Francés":
-
-        target_lang_code = "fr"
+    texto_final = translator.translate(texto_a_traducir, src=inicio, dest=traduccion).text
 
 
-    result, output_text = text_to_speech(translated_text, target_lang_code)
+    if idioma_destino == "Español":
+
+        traduccion = "es"
+
+    elif idioma_destino == "Inglés":
+
+        traduccion = "en"
+          
+    elif idioma_destino == "Frances":
+
+        traduccion = "fr"
+          
+    elif idioma_destino == "Alemán":
+
+        traduccion = "de"
+
+
+    result, output_text = text_to_speech(texto_final, traduccion)
 
 
     audio_file = open(f"temp/{result}.mp3", "rb")
@@ -109,4 +118,6 @@ if text and target_lang:
     st.markdown(f"## Texto en audio:")
 
     st.write(f" {output_text}")
+
+
 
