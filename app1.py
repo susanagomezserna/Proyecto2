@@ -73,10 +73,5 @@ if texto_a_traducir:
         st.write("Texto traducido:")
         st.write(traduccion)
 
-        audio = gTTs(text=traduccion, lang=idioma_destino.lower())
-        st.audio(audio, format="audio/mp3")
-
-
-
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
