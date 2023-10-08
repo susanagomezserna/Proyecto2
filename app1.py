@@ -83,4 +83,4 @@ if texto_a_traducir:
 
         os. remove(audio_file_path)
     except Exception as e:
-        st.write("Ocurrió un error al traducir el texto.")
+        st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
