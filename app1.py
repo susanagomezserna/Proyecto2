@@ -48,6 +48,11 @@ if img_file_buffer is not None:
     st.write(text) 
 
 
+    audio = gTTS(text = text, lang='es')
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+            audio.save(temp_audio_file.name)
+            st.audio(temp_audio_file.name, format="audio/mp3")
+
 #aqui empieza la otra interfaz
 
 # Título de la aplicación
@@ -80,11 +85,6 @@ if texto_a_traducir:
         
         st.write("Texto traducido:")
         st.write(traduccion)
-
-        audio = gTTS(text=traduccion, lang=idioma_destino.lower())
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
-            audio.save(temp_audio_file.name)
-            st.audio(temp_audio_file.name, format="audio/mp3")
               
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
