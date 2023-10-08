@@ -79,8 +79,8 @@ if texto_a_traducir:
         audio = gTTs(text = traduccion, lang = idioma_destino.lower())
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
               audio.save(temp_audio_file.name)
-              st.audio(temo_audio_file.name, format ="audio/mp3", key='audio')
+              st.write("Descarga el audio generado")
+              st.markdown(f'<a href="{temp_audio_file.name}" download="traduccion.mp3">Descargar</a>', unsafe_allow_html=True)
 
-        os. remove(temp_audio_file.name)
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
