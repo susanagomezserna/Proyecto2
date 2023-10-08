@@ -72,13 +72,19 @@ if texto_a_traducir:
         
         st.write("Texto traducido:")
         st.write(traduccion)
-          
-    # Reproducir audio de la traducción
+
+      
+        # Reproducir audio de la traducción
         audio = gTTS(text=traduccion, lang=idioma_destino.lower())
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
             audio.save(temp_audio_file.name)
-            st.audio(temp_audio_file.name, format="audio/mp3")
+            audio_path = temp_audio_file.name
 
+        # Crear un botón para reproducir el audio
+        if st.button("Reproducir Audio"):
+            os.system(f"afplay {audio_path}")  # Esto funciona en macOS
+            # Puedes ajustar el comando según tu sistema operativo si no estás en macOS
 
+      
     except Exception as e:
-        st.write("Ocurrió un error al traducir el texto o al reproducir el audio.")
+        st.write("Ocurrió un error al traducir el texto.")
