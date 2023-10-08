@@ -22,4 +22,4 @@ Streamlit-bokeh-events
 
 textblob==0.17.1
 
-streamlit googletrans==4.0.0-rc1 gtts pydub
+googletrans==4.0.0-rc1 gtts pydub
