@@ -53,7 +53,7 @@ st.title("Traductor de Texto")
 texto_a_traducir = st.text_area("Escribe el texto que deseas traducir:")
 
 # Selección del idioma de destino
-idioma_destino = st.selectbox("Selecciona el idioma de destino:", ["Español", "Inglés", "Francés", "Alemán"])
+idioma_destino = st.selectbox("Selecciona el idioma al que quieres traducir:", ["Español", "Inglés", "Francés", "Alemán"])
 
 # Traducción del texto
 translator = Translator()
@@ -75,5 +75,38 @@ if texto_a_traducir:
     except Exception as e:
         st.write("Ocurrió un error al traducir el texto.")
 
-# Nota
-st.sidebar.write("Nota: Este es un ejemplo simple de traducción. La precisión de la traducción puede variar.")
+def text_to_speech(text, tld):
+    return my_file_name, text
+
+if text and target_lang:
+
+    target_lang_code = languages[target_lang]
+
+    translated_text = translator.translate(text, src=source_lang, dest=target_lang_code).text
+
+
+    if target_lang == "Chino Mandarín":
+
+        target_lang_code = "zh-cn"
+
+    elif target_lang == "Francés":
+
+        target_lang_code = "fr"
+
+
+    result, output_text = text_to_speech(translated_text, target_lang_code)
+
+
+    audio_file = open(f"temp/{result}.mp3", "rb")
+
+    audio_bytes = audio_file.read()
+
+    st.markdown(f"## Tu audio:")
+
+    st.audio(audio_bytes, format="audio/mp3", start_time=0)
+
+
+    st.markdown(f"## Texto en audio:")
+
+    st.write(f" {output_text}")
+
