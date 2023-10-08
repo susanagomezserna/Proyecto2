@@ -46,28 +46,6 @@ if img_file_buffer is not None:
     text=pytesseract.image_to_string(img_rgb)
     st.write(text) 
 
-idioma_destino1 = st.selectbox("Selecciona el idioma de destino:", ["Español", "Inglés", "Francés", "Alemán"])
-
-# Traducción del texto
-translator = Translator()
-if text:
-    try:
-        if idioma_destino1 == "Español":
-            traduccion1 = translator.translate(texto_a_traducir, dest="es").text
-        elif idioma_destino1 == "Inglés":
-            traduccion1 = translator.translate(texto_a_traducir, dest="en").text
-        elif idioma_destino1 == "Francés":
-            traduccion1 = translator.translate(texto_a_traducir, dest="fr").text
-        elif idioma_destino1 == "Alemán":
-            traduccion1 = translator.translate(texto_a_traducir, dest="de").text
-        else:
-            traduccion1 = "Seleccione un idioma de destino válido"
-        
-        st.write("Texto traducido:")
-        st.write(traduccion1)
-    except Exception as e:
-        st.write("Ocurrió un error al traducir el texto.")
-
 
 #aqui empieza la otra interfaz
 
